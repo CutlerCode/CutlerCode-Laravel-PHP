@@ -5,19 +5,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 class RequestsModelTest extends TestCase {
     use RefreshDatabase;
-    /** @test */
-    public function it_has_correct_fillable_attributes(): void {
+    public function test_it_has_correct_fillable_attributes(): void {
         $request = new Requests();
-        $expected = ['name', 'goal', 'email', 'company_name', 'website', 'employees', 'location', 'phone', 'challenge', 'comments'];
+        $expected = ['name', 'goal', 'email', 'company_name', 'website', 'employees', 'location', 'phone', 'challenge', 'comments', 'status'];
         $this->assertEquals($expected, $request->getFillable());
     }
-    /** @test */
-    public function it_has_default_pending_status(): void {
+    public function test_it_has_default_pending_status(): void {
         $request = new Requests();
         $this->assertEquals('pending', $request->status);
     }
-    /** @test */
-    public function it_returns_correct_status_options(): void {
+    public function test_it_returns_correct_status_options(): void {
         $expected = [
             'pending' => 'Pending',
             'in_progress' => 'In Progress',
@@ -26,8 +23,7 @@ class RequestsModelTest extends TestCase {
         ];
         $this->assertEquals($expected, Requests::getStatusOptions());
     }
-    /** @test */
-    public function it_returns_correct_status_badge_classes(): void {
+    public function test_it_returns_correct_status_badge_classes(): void {
         $request = new Requests();
         $request->status = 'pending';
         $this->assertEquals('badge-warning', $request->getStatusBadgeClass());
@@ -40,8 +36,7 @@ class RequestsModelTest extends TestCase {
         $request->status = 'unknown';
         $this->assertEquals('badge-secondary', $request->getStatusBadgeClass());
     }
-    /** @test */
-    public function employees_attribute_is_cast_to_integer(): void {
+    public function test_employees_attribute_is_cast_to_integer(): void {
         $request = Requests::factory()->create(['employees' => '10']);
         $this->assertIsInt($request->employees);
         $this->assertEquals(10, $request->employees);

@@ -7,16 +7,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 class NewRequestNotificationTest extends TestCase {
     use RefreshDatabase;
-    /** @test */
-    public function notification_has_correct_channels(): void {
+    public function test_notification_has_correct_channels(): void {
         $request = Requests::factory()->create();
         $user = User::factory()->create();
         $notification = new NewRequest($request);
         $channels = $notification->via($user);
         $this->assertEquals(['mail', 'database'], $channels);
     }
-    /** @test */
-    public function notification_creates_correct_mail_message(): void {
+    public function test_notification_creates_correct_mail_message(): void {
         $request = Requests::factory()->create([
             'name' => 'John Doe',
             'email' => 'john@example.com',
@@ -29,8 +27,7 @@ class NewRequestNotificationTest extends TestCase {
         $this->assertEquals('New Project Request Submitted - CutlerTech', $mailMessage->subject);
         $this->assertStringContainsString('Hello Admin User!', $mailMessage->greeting);
     }
-    /** @test */
-    public function notification_creates_correct_database_entry(): void {
+    public function test_notification_creates_correct_database_entry(): void {
         $request = Requests::factory()->create(['name' => 'John Doe', 'email' => 'john@example.com', 'company_name' => 'Test Company']);
         $user = User::factory()->create();
         $notification = new NewRequest($request);

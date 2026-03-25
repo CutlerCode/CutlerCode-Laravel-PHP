@@ -6,7 +6,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\VerifyCsrfTokenMiddleware;
 return Application::configure(basePath: dirname(__DIR__))->withRouting(web: __DIR__.'/../routes/web.php', commands: __DIR__.'/../routes/console.php', health: '/up')->withMiddleware(function (Middleware $middleware): void {
     $middleware->alias(['admin' => AdminMiddleware::class]);
-    $middleware->web(append: [VerifyCsrfTokenMiddleware::class]);
+    $middleware->web(replace: [\Illuminate\Foundation\Http\Middleware\PreventRequestForgery::class => VerifyCsrfTokenMiddleware::class]);
 })->withExceptions(function (Exceptions $exceptions): void {
     
 })->create();

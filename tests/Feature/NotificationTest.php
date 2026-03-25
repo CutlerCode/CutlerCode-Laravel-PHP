@@ -8,8 +8,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 class NotificationTest extends TestCase {
     use RefreshDatabase, WithoutMiddleware;
-    /** @test */
-    public function authenticated_user_can_view_notifications(): void {
+    public function test_authenticated_user_can_view_notifications(): void {
         $user = User::factory()->create();
         $request = Requests::factory()->create();
         $user->notify(new NewRequest($request));
@@ -18,8 +17,7 @@ class NotificationTest extends TestCase {
         $response->assertViewIs('notifications.index');
         $response->assertViewHas('notifications');
     }
-    /** @test */
-    public function user_can_mark_notification_as_read(): void {
+    public function test_user_can_mark_notification_as_read(): void {
         $user = User::factory()->create();
         $request = Requests::factory()->create();
         $user->notify(new NewRequest($request));
@@ -28,8 +26,7 @@ class NotificationTest extends TestCase {
         $response->assertRedirect();
         $this->assertNotNull($notification->fresh()->read_at);
     }
-    /** @test */
-    public function user_can_mark_all_notifications_as_read(): void {
+    public function test_user_can_mark_all_notifications_as_read(): void {
         $user = User::factory()->create();
         $request = Requests::factory()->create();
         $user->notify(new NewRequest($request));
@@ -40,8 +37,7 @@ class NotificationTest extends TestCase {
         $user->refresh();
         $this->assertEquals(0, $user->unreadNotifications->count());
     }
-    /** @test */
-    public function user_can_delete_specific_notification(): void {
+    public function test_user_can_delete_specific_notification(): void {
         $user = User::factory()->create();
         $request = Requests::factory()->create();
         $user->notify(new NewRequest($request));
@@ -51,8 +47,7 @@ class NotificationTest extends TestCase {
         $response->assertSessionHas('success', 'Notification deleted successfully.');
         $this->assertDatabaseMissing('notifications', ['id' => $notification->id]);
     }
-    /** @test */
-    public function user_can_delete_all_notifications(): void {
+    public function test_user_can_delete_all_notifications(): void {
         $user = User::factory()->create();
         $request = Requests::factory()->create();
         $user->notify(new NewRequest($request));
