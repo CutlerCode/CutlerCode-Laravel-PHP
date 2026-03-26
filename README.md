@@ -4,7 +4,7 @@ This is the Laravel project source code for the Cutler Code website.
 
 ## Prerequisites
 
-This website runs on Laravel 12, which requires using at least version 8.2 of PHP and at least version 2.2 of Composer.  Make sure to install PHP and Composer with these versions or later before installing and setting up this project.  
+This website runs on Laravel 13, which requires using at least version 8.3 of PHP and at least version 2.2 of Composer.  Make sure to install PHP and Composer with these versions or later before installing and setting up this project.  
 
 ## Local Setup Instructions for Development
 
