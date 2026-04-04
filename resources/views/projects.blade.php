@@ -1,20 +1,27 @@
 @extends('master')
 @section('title', 'Projects')
 @section('content')
-<h1>Projects</h1>
+<h1>Current Projects</h1>
 <div class="grid">
     <div class="project-card">
         <h2>Cutler Code Website</h2>
-        <a href="#"><img src="{{asset('images/project_image.png')}}" alt="CutlerTech Website link" class="project-image"></a>
+        <a href="https://github.com/CutlerCode/CutlerCode-Laravel-PHP"><img src="{{asset('images/CutlerCodeProject.png')}}" alt="Cutler Code Website link" class="project-image"></a>
         <b>Web Development</b>
         <p>Stack: Laravel</p>
+        <p>Developer: Alex Cutler</p>
+    </div>
+    <div class="project-card">
+        <h2>Park Reservations Tool</h2>
+        <a href="https://github.com/cacutler/Park-Reservations-CSharp-ASPNet"><img src="{{asset('images/ParkReservationsProject.png')}}" alt="Park Reservations Github Repository Link" class="project-image"></a>
+        <b>Web Development</b>
+        <p>Stack: C#, ASP.Net, and Razor</p>
         <p>Developer: Alex Cutler</p>
     </div>
 </div>
 <style>
     .grid {
         display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
     }
     .project-card {
@@ -23,10 +30,11 @@
         align-items: center;
         border: 3px solid black;
         border-radius: 6px;
-        width: 25%;
+        width: 75%;
+        height: auto;
         margin: 1rem auto;
         text-align: center;
-        padding: 2rem;
+        padding: 1rem 2rem;
         background-color: #ffa900;
     }
     .project-image {
@@ -38,6 +46,11 @@
     }
     p {
         padding: 0 !important;
+    }
+    h2 {
+        border-bottom: 2px solid black;
+        width: 75%;
+        text-align: center;
     }
     @media screen and (max-width: 992px) {
         .project-card {
